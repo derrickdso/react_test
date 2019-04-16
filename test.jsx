@@ -1,40 +1,54 @@
-class MyForm extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        input: '',
-        submit: ''
-      };
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
     }
-    handleChange(event) {
-      this.setState({
-        input: event.target.value
-      });
-    }
-    handleSubmit(event) {
-      // change code below this line
-      event.preventDefault()
-      this.setState({
-        input: '',
-        submit: this.state.input
-      });
-      // change code above this line
-    }
-    render() {
-      return (
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            { /* change code below this line */ }
-            <input value = {this.state.input} onChange = {this.handleChange}/>
-            { /* change code above this line */ }
-            <button type='submit'>Submit!</button>
-          </form>
-          { /* change code below this line */ }
-          <h1>{this.state.submit}</h1>
-          { /* change code above this line */ }
-        </div>
-      );
-    }
-  };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+  render() {
+    return (
+       <div>
+        { /* change code below this line */ }
+        <GetInput input={this.state.inputValue} handleChange= {this.handleChange} />
+        <RenderInput input={this.state.inputValue}/>
+        { /* change code above this line */ }
+       </div>
+    );
+  }
+};
+
+class GetInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Get Input:</h3>
+        <input
+          value={this.props.input}
+          onChange={this.props.handleChange}/>
+      </div>
+    );
+  }
+};
+
+class RenderInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Input Render:</h3>
+        <p>{this.props.input}</p>
+      </div>
+    );
+  }
+};
